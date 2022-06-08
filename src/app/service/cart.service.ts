@@ -9,8 +9,8 @@ import { environment } from 'src/environments/environment';
 })
 export class CartService {
 
-  public cartItemList: any = [];
   public productList = new BehaviorSubject<any>([]);
+  public totalCartItem: number = 0;
 
   constructor(private http: HttpClient, private route: Router) { }
 
@@ -24,20 +24,11 @@ export class CartService {
   }
 
   addToCart(product: any) {
-    this.getTotalPrice();
     return this.http.post<{
       error: boolean,
       message: string,
       response: any
     }>(`${environment.baseUrl}/cart/addToCart`, product);
-  }
-
-  getTotalPrice(): number {
-    let total = 0;
-    this.cartItemList.map((a: any) => {
-      total += a.cost
-    })
-    return total
   }
 
   removeCartItem(id: string) {
@@ -49,7 +40,10 @@ export class CartService {
   }
 
   removeAllCart() {
-    this.cartItemList = [];
-    this.productList.next(this.cartItemList)
+    return this.http.delete<{
+      error: boolean,
+      message: string,
+      response: any
+    }>(`${environment.baseUrl}/cart/deleteAllCart`);
   }
 }

@@ -19,19 +19,22 @@ export class CartComponent implements OnInit {
 
   removeItem(id: string) {
     this.cartService.removeCartItem(id).subscribe(res => {
-      this.totalCartItem = res.response.length;
       this.getCart()
     })
   }
 
+
   getCart() {
     this.cartService.getFromCart().subscribe(res => {
       this.products = res.response;
-      this.totalCartItem = res.response.length;
+      this.totalCartItem = res.response.length
+      console.log(this.totalCartItem);
     })
   }
 
   emptyCart() {
-    this.cartService.removeAllCart();
+    this.cartService.removeAllCart().subscribe(res => {
+      this.getCart()
+    })
   }
 }
