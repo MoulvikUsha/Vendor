@@ -26,12 +26,12 @@ export class CatalogueComponent implements OnInit {
   ];
   public cartItemList: any = [];
   public productList = new BehaviorSubject<any>([]);
+  public totalCartItem: number = 0;
 
   constructor(private service: ApiService, private cartService: CartService) { }
 
   ngOnInit(): void {
     this.getItemData();
-
   }
 
   getItemData() {
@@ -43,7 +43,7 @@ export class CatalogueComponent implements OnInit {
   addToCart(item: any) {
     this.cartService.addToCart(item).subscribe(res => {
       this.cartItemList.push(res);
-      console.log(this.cartItemList);
+      this.totalCartItem = res.response.length
     })
   }
 

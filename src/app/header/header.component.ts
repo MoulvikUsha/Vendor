@@ -11,8 +11,6 @@ import { CartService } from '../service/cart.service';
 export class HeaderComponent implements OnInit {
 
   public totalCartItem: number = 0;
-  public cartItemList: any = [];
-  public productList = new BehaviorSubject<any>([]);
   add: boolean = true;
 
   constructor(private cartService: CartService, private router: Router) { }
@@ -21,10 +19,6 @@ export class HeaderComponent implements OnInit {
     this.cartService.getFromCart().subscribe(res => {
       this.totalCartItem = res.response.length
     })
-
-    if (sessionStorage.getItem('admin')) {
-      this.add = true
-    }
   }
 
   logout() {
