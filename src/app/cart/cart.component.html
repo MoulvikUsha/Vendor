@@ -1,0 +1,49 @@
+<app-header></app-header>
+<ng-container *ngIf="products.length != 0">
+  <div class="container-fluid">
+    <div class="card-table">
+      <div class="cart-product">
+        <table class="table table-success table-striped">
+          <thead>
+            <tr>
+              <th>Sl No</th>
+              <th>Item Name</th>
+              <th>Image</th>
+              <th>Info</th>
+              <th>Cost</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of products; let i = index">
+              <th>{{i+1}}</th>
+              <td>{{item.itemName}}</td>
+              <td>{{item.image}}</td>
+              <td>{{item.info}}</td>
+              <td>{{item.cost}}</td>
+              <td><button class="badge bg-danger" (click)="removeItem(item)">Delete</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="empty d-flex justify-content-center">
+      <p>{{total}}</p>
+      <button class="btn btn-primary" (click)="emptyCart()">Empty Cart</button>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="products.length == 0">
+  <div class="container-fluid">
+    <div class="card">
+      <h4 class="card-title">My Cart</h4>
+    </div>
+    <div class="center">
+      <img src="/assets/images/Cart" alt="">
+      <h5>Your <strong>Cart</strong> is Empty</h5>
+      <button class="badge bg-primary" routerLink="/catalogue">Shop Now</button>
+    </div>
+  </div>
+</ng-container>
+

@@ -1,0 +1,21 @@
+<app-header></app-header>
+<div class="products">
+  <div class="row p-4">
+    <div class="items col-md-3 col-sm-6 p-2" *ngFor="let item of itemData[0]">
+      <div class="card">
+        <img [src]="item.image" class="card-img-top" alt="...">
+        <div class="card-body">
+          <div class="info">
+            <p><strong>{{item.itemName}}</strong></p>
+            <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip"
+              title="{{item.info}}">
+              info
+            </span>
+          </div>
+          <p><strong>&#x20b9; {{item.cost}}</strong></p>
+          <button type="button" class="btn btn-dark" (click)="addToCart(item)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
