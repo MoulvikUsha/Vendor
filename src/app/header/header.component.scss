@@ -3,4 +3,10 @@
   position: sticky;
   top: 0px;
   z-index: 1;
+  background-image: linear-gradient(to bottom right, rgb(201, 209, 219), rgb(161, 140, 167));
+}
+
+.cart {
+  position: relative;
+  right: 30px;
 }

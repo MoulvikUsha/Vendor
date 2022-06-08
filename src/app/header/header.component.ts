@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { CartService } from '../service/cart.service';
 
 @Component({
@@ -10,19 +12,30 @@ export class HeaderComponent implements OnInit {
 
   public totalCartItem: number = 0;
   public cartItemList: any = [];
+  public productList = new BehaviorSubject<any>([]);
+  add: boolean = true;
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private router: Router) { }
 
   ngOnInit(): void {
-    this.cartService.getProducts().subscribe(res => {
-      this.totalCartItem = res.length
+    this.cartService.getFromCart().subscribe(res => {
+      this.totalCartItem = res.response.length
     })
+
+    if (sessionStorage.getItem('admin')) {
+      this.add = true
+    }
   }
 
-
-  addToCart(item: any) {
-    this.cartService.addToCart(item).subscribe(res => {
-    this.cartItemList
-    });
+  logout() {
+    sessionStorage.clear();
+    this.router.navigate(['/']);
   }
+
+  addProduct() {
+    if (sessionStorage.getItem('admin')) {
+      this.router.navigate(['/addItem']);
+    }
+  }
+
 }

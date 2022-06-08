@@ -14,26 +14,23 @@ export class CartService {
 
   constructor(private http: HttpClient, private route: Router) { }
 
-  getProducts() {
-    return this.productList.asObservable();
-  }
 
-  setProducts(product: any) {
-    this.cartItemList.push(...product);
-    this.productList.next(product)
+  getFromCart() {
+    return this.http.get<{
+      error: boolean,
+      message: string,
+      response: any
+    }>(`${environment.baseUrl}/cart/getFromCart`);
   }
 
   addToCart(product: any) {
-    // this.cartItemList.push(product);
-    // this.productList.next(this.cartItemList);
     this.getTotalPrice();
     return this.http.post<{
-      error: Boolean,
+      error: boolean,
       message: string,
       response: any
-    }>(`${environment.baseUrl}/products/addItem`, product);
+    }>(`${environment.baseUrl}/cart/addToCart`, product);
   }
-
 
   getTotalPrice(): number {
     let total = 0;
@@ -43,13 +40,12 @@ export class CartService {
     return total
   }
 
-  removeCartItem(product: any) {
-    this.cartItemList.map((a: any, i: any) => {
-      if (product.itemName === a.itemName) {
-        this.cartItemList.splice(i, 1)
-      }
-    })
-    this.productList.next(this.cartItemList)
+  removeCartItem(id: string) {
+    return this.http.delete<{
+      error: boolean,
+      message: string,
+      response: any
+    }>(`${environment.baseUrl}/cart/deleteFromCart/${id}`);
   }
 
   removeAllCart() {

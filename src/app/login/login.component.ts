@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   authenticateUser(user: any) {
     sessionStorage.setItem("user", user);
     if (user == "admin") {
-      this.router.navigate(['/addItem']);
+      this.router.navigate(['/catalogue']);
     } else {
       this.router.navigate(['/catalogue']);
     }

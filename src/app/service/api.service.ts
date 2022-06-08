@@ -13,7 +13,7 @@ export class ApiService {
 
   getItem() {
     return this.http.get<{
-      error: Boolean,
+      error: boolean,
       message: string,
       response: any
     }>(`${environment.baseUrl}/products/getItem`).pipe(map((data: any) => {
@@ -23,7 +23,7 @@ export class ApiService {
 
   addItem(data: any) {
     return this.http.post<{
-      error: Boolean,
+      error: boolean,
       message: string,
       response: any
     }>(`${environment.baseUrl}/products/addItem`, data)

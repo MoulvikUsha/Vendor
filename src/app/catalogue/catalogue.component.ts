@@ -10,7 +10,20 @@ import { CartService } from '../service/cart.service';
 })
 export class CatalogueComponent implements OnInit {
 
-  public itemData :any = [];
+  public itemData :any = [
+    // {
+    //       itemName : "Titan",
+    //       cost : 3000,
+    //       info : "One of the finest watches",
+    //       image : "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    //     },
+    //     {
+    //       itemName : "Tissot",
+    //       cost : 10000,
+    //       info : "One of the finest watches",
+    //       image : "https://images.pexels.com/photos/2113994/pexels-photo-2113994.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    //     }
+  ];
   public cartItemList: any = [];
   public productList = new BehaviorSubject<any>([]);
 
@@ -24,16 +37,14 @@ export class CatalogueComponent implements OnInit {
   getItemData() {
     this.service.getItem().subscribe((res: any) => {
       this.itemData.push(res.response);
-      console.log(this.itemData);
     })
   }
 
   addToCart(item: any) {
-    this.cartService.addToCart(item)
-    // this.cartService.addToCart(item).subscribe(res => {
-    //   this.cartItemList.push(res);
-    //   console.log(this.cartItemList);
-    // })
+    this.cartService.addToCart(item).subscribe(res => {
+      this.cartItemList.push(res);
+      console.log(this.cartItemList);
+    })
   }
 
 }
