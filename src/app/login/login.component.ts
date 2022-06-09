@@ -23,14 +23,14 @@ export class LoginComponent implements OnInit {
 
   authenticateUser(user: any) {
     sessionStorage.setItem("user", user);
-    if (user == "admin") {
-      this.router.navigate(['/catalogue']);
-    }
+
   }
 
   onSubmit() {
     if(this.loginForm.value){
       this.authenticateUser(this.loginForm.value.userName);
+      this.router.navigate(['/catalogue']);
+
     }
   }
 
