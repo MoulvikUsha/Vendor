@@ -31,8 +31,6 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if(this.loginForm.value){
       this.authenticateUser(this.loginForm.value.userName);
-    } else {
-      alert('Enter User Name and Password');
     }
   }
 
