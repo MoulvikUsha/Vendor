@@ -11,7 +11,7 @@ import { CartService } from '../service/cart.service';
 export class HeaderComponent implements OnInit {
 
   public totalCartItem: number = 0;
-  add: boolean = true;
+  add: boolean = false;
 
   constructor(private cartService: CartService, private router: Router) { }
 
@@ -20,17 +20,18 @@ export class HeaderComponent implements OnInit {
       this.totalCartItem = res.response.length
       console.log(this.totalCartItem);
     })
+
+    if (sessionStorage.user == 'admin') {
+      this.add = true
+    }
+    else {
+      this.add = false
+    }
   }
 
   logout() {
     sessionStorage.clear();
     this.router.navigate(['/']);
-  }
-
-  addProduct() {
-    if (sessionStorage.getItem('admin')) {
-      this.router.navigate(['/addItem']);
-    }
   }
 
 }
