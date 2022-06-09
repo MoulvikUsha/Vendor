@@ -11,7 +11,6 @@ import { CartService } from '../service/cart.service';
 export class CatalogueComponent implements OnInit {
 
   public itemData :any = [];
-  public cartItemList: any = [];
   public totalCartItem: number = 0;
 
   constructor(private service: ApiService, private cartService: CartService) { }
@@ -30,7 +29,6 @@ export class CatalogueComponent implements OnInit {
   addToCart(item: any) {
     this.cartService.addToCart(item).subscribe(res => {
       this.totalCartItem = res.response.length
-      this.cartItemList.push(res);
     })
   }
 
